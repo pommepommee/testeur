@@ -1,0 +1,610 @@
+// TP condition & behaviour
+with {
+	la machine à café est dans son état initial
+		une DRK a été sélectionnée
+}
+
+ensure that {
+	when {
+		activation du bouton valider
+	}
+	then {
+		désactiver DRKS
+	}
+}
+//
+
+
+
+=== TP/CF/DR/BV-01
+Envoyer UtInitialize à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtResult.Success == FAUX)
+  arrêter t0
+  Retourner fail
+> UTPPort.Receive(UtResult.Success == VRAI)
+  arrêter t0
+> t0.timeout
+  Retourner inconc
+Envoyer UtGetPrint à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtPrintResult.Value == PIXIT.no_drink_selected)
+  arrêter t0
+  Retourner pass
+> UTPPort.Receive(UtPrintResult.Value)
+  arrêter t0
+  Retourner fail
+> t0.timeout
+  Retourner inconc
+
+
+
+=== TP/CF/DR/BV-02
+Envoyer UtInitialize à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtResult.Success == FAUX)
+  arrêter t0
+  Retourner fail
+> UTPPort.Receive(UtResult.Success == VRAI)
+  arrêter t0
+> t0.timeout
+  Retourner inconc
+Envoyer UtGetValidate à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtValidateResult.Value == FAUX)
+	arrêter t0
+	Retourner pass
+> UTPPort.Receive(UtValidateResult.Value == VRAI)
+	arrêter t0
+	Retourner fail
+> t0.timeout
+	Retourner inconc
+
+
+
+=== TP/CF/DR/BV-03
+Envoyer UtInitialize à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtResult.Success == FAUX)
+  arrêter t0
+  Retourner fail
+> UTPPort.Receive(UtResult.Success == VRAI)
+  arrêter t0
+> t0.timeout
+  Retourner inconc
+  
+UtInitialize, UtSetNbSugar, UtSetNbDrinks, UtGetInfos, UtGetPrint
+UtSelectDrink, UtSetSugar, UtValidate, UtInsertCoin, UtGetDrink, UtGetChange
+
+
+
+=== TP/CF/DR/BV-04
+Envoyer UtInitialize à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtResult.Success == FAUX)
+	arrêter t0
+	Retourner fail
+> UTPPort.Receive(UtResult.Success == VRAI)
+	arrêter t0
+> t0.timeout
+	Retourner inconc
+Envoyer UtSelectDrink(DRK)
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectResult.Success == VRAI)
+	arrêter t0
+> UTPPort.Receive(UtGetInfosResult.label == FAUX)
+	arrêter t0
+	Retourner fail
+> t0.timeout
+	Retourner inconc
+Envoyer UtGetPrint
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtGetPrintResult)
+	arrêter t0
+> UTPPort.Receive(UtGetInfosResult.label == FAUX)
+	arrêter t0
+	Retourner fail
+> t0.timeout
+	Retourner inconc
+Envoyer UtSelectDrink(DRK_2)
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectResult.Success == VRAI)
+	real_price_drk <- getPrice(DRK_2)
+	arrêter t0
+> UTPPort.Receive(UtGetInfosResult.label == FAUX)
+	arrêter t0
+	Retourner fail
+> t0.timeout
+	Retourner inconc
+Envoyer UtGetPrint
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtGetPrintResult)
+	arrêter t0
+	new_price_printed <- UtGetPrintResult.Value
+> UTPPort.Receive(UtGetInfosResult.label == FAUX)
+	arrêter t0
+	Retourner fail
+> t0.timeout
+	Retourner inconc
+Si new_price_printed == real_price_drk Alors
+    Retourner pass
+Sinon
+    Retourner fail
+FinSi
+
+
+
+=== TP/CF/DR/BV-07
+Envoyer UtInitialize à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtResult.Success == FAUX)
+	arrêter t0
+	Retourner fail
+> UTPPort.Receive(UtResult.Success == VRAI)
+	arrêter t0
+> t0.timeout
+	Retourner inconc
+Envoyer UtGetInfo à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtGetInfoResult.drinks is empty)
+	arrêter t0
+    Retourner fail
+> UTPPort.Receive(UtGetInfoResult.drinks is not empty)
+    drinks = UtGetInfoResult.drinks 
+    arrêter t0
+> t0.timeout
+    Retourner inconc
+drink = search(isSugar, drinks)
+Envoyer UtSelectDrink(drink) à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectResult.Value == FAUX)
+    arrêter t0
+    Retourner fail
+> UTPPort.Receive(UtSelectResult.Value == VRAI)
+    arrêter t0
+> t0.timeout
+    Retourner inconc
+Envoyer UtSelectSugar(11) à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectSugarResult.Succes == FAUX)
+	arrêter t0
+    Retourner pass
+> UTPPort.Receive(UtSelectSugarResult.Success == VRAI)
+	arrêter t0
+    Retourner fail
+> t0.timeout
+    Retourner inconc
+
+
+=== TP/CF/DR/BV-10
+Envoyer UtInitialize à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtResult.Success == FAUX)
+	arrêter t0
+	Retourner fail
+> UTPPort.Receive(UtResult.Success == VRAI)
+	arrêter t0
+> t0.timeout
+	Retourner inconc
+Envoyer UtSelectDrink(DRK) à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+ >UTPPort.Receive(UtSelectResult.Success == FAUX)
+    arrêter t0
+    Retourner fail
+> UTPPort.Receive(UtSelectResult.Success == VRAI)
+    arrêter t0
+> t0.timeout
+    Retourner inconc
+Envoyer UtGetChange à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectResult.Success == FAUX)
+	arrêter t0
+	Retourner pass
+> UTPPort.Receive(UtSelectResult.Success == VRAI)
+	arrêter t0
+	Retourner fail
+> t0.timeout
+	Retourner inconc
+
+
+
+=== TP/CF/DR/BV-13
+Envoyer UtInitialize à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtResult.Success == FAUX)
+	arrêter t0
+	Retourner fail
+> UTPPort.Receive(UtResult.Success == VRAI)
+	arrêter t0
+> t0.timeout
+	Retourner inconc
+Envoyer UtSelectDrink(0) à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectResult.Value == FAUX)
+    arrêter t0
+    Retourner fail
+> UTPPort.Receive(UtSelectResult.Value == VRAI)
+    arrêter t0
+> t0.timeout
+    Retourner inconc
+Envoyer UtValidateDrink à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectResult.Success == FAUX)
+    arrêter t0
+    Retourner fail
+> UTPPort.Receive(UtSelectResult.Success == VRAI)
+    arrêter t0
+> t0.timeout
+    Retourner inconc
+alt
+> Envoyer UtInsertCoin(0.10) à l'IUT
+> Envoyer UtInsertCoin(0.20) à l'IUT
+> Envoyer UtInsertCoin(0.50) à l'IUT
+> Envoyer UtInsertCoin(1) à l'IUT
+> Envoyer UtInsertCoin(2) à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectResult.Success == VRAI)
+	arrêter t0
+	Retourner pass
+> UTPPort.Receive(UtSelectResult.Succes == FAUX)
+	arrêter t0
+	Retourner fail
+> t0.timeout
+	Retourner inconc
+
+
+
+=== TP/CF/DR/BV-16
+Envoyer UtInitialize à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtResult.Success == FAUX)
+	arrêter t0
+	Retourner fail
+> UTPPort.Receive(UtResult.Success == VRAI)
+	arrêter t0
+> t0.timeout
+	Retourner inconc
+Envoyer UtSelectDrink(0) à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectResult.Value == FAUX)
+    arrêter t0
+    Retourner fail
+> UTPPort.Receive(UtSelectResult.Value == VRAI)
+    arrêter t0
+> t0.timeout
+    Retourner inconc
+Envoyer UtValidateDrink à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectResult.Success == FAUX)
+    arrêter t0
+    Retourner fail
+> UTPPort.Receive(UtSelectResult.Success == VRAI)
+    arrêter t0
+> t0.timeout
+    Retourner inconc
+Pour DRK in DRKS:
+	Envoyer UtSelectDrink(DRK) à l'IUT
+	Démarrer t0 d'une durée PIXIT.tc_noac
+	alt
+	> UTPPort.Receive(UtSelectResult.Success == VRAI)
+		arrêter t0
+		Retourner fail
+	> UTPPort.Receive(UtSelectResult.Success == FAUX)
+		arrêter t0
+	> t0.timeout
+		Retourner inconc
+Retourner pass
+
+
+=== TP/CF/DR/BV-19
+Envoyer UtInitialize à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtResult.Success == FAUX)
+	arrêter t0
+	Retourner fail
+> UTPPort.Receive(UtResult.Success == VRAI)
+	arrêter t0
+> t0.timeout
+	Retourner inconc
+Envoyer UtSelectDrink(0) à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectResult.Value == FAUX)
+    arrêter t0
+    Retourner fail
+> UTPPort.Receive(UtSelectResult.Value == VRAI)
+    arrêter t0
+> t0.timeout
+    Retourner inconc
+Envoyer UtValidateDrink à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectResult.Success == FAUX)
+    arrêter t0
+    Retourner fail
+> UTPPort.Receive(UtSelectResult.Success == VRAI)
+    arrêter t0
+> t0.timeout
+    Retourner inconc
+PRICE <- getPrice(DRK)
+Envoyer UtGetPrint à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtGetPrintResult.Value == PRICE)
+	arrêter t0
+> UTPPort.Receive(UtGetPrintResult.Value != PRICE)
+	arrêter t0
+	Retourner fail
+> t0.timeout
+	Retourner inconc
+Tant Que MON_INS < PRICE Alors
+	Envoyer UtInsertCoin(2) à l'IUT
+	Démarrer t0 d'une durée PIXIT.tc_noac
+	alt
+	> UTPPort.Receive(UtSelectResult.Success == VRAI)
+		arrêter t0
+	> UTPPort.Receive(UtSelectResult.Success == FAUX)
+		arrêter t0
+		Retourner fail
+	> t0.timeout
+		Retourner inconc
+Envoyer UtGetPrint à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtGetPrintResult.Value == MSG_RECUP)
+	arrêter t0
+	Retourner pass
+> UTPPort.Receive(UtGetPrintResult.Value != MSG_RECUP)
+	arrêter t0
+	Retourner fail
+> t0.timeout
+	Retourner inconc
+
+
+=== TP/CF/DR/BV-22
+Envoyer UtInitialize à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtResult.Success == FAUX)
+	arrêter t0
+	Retourner fail
+> UTPPort.Receive(UtResult.Success == VRAI)
+	arrêter t0
+> t0.timeout
+	Retourner inconc
+Envoyer UtSelectDrink(0) à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectResult.Value == FAUX)
+    arrêter t0
+    Retourner fail
+> UTPPort.Receive(UtSelectResult.Value == VRAI)
+    arrêter t0
+> t0.timeout
+    Retourner inconc
+Envoyer UtValidateDrink à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectResult.Success == FAUX)
+    arrêter t0
+    Retourner fail
+> UTPPort.Receive(UtSelectResult.Success == VRAI)
+    arrêter t0
+> t0.timeout
+    Retourner inconc
+PRICE <- getPrice(DRK)
+Envoyer UtGetPrint à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtGetPrintResult.Value == PRICE)
+	arrêter t0
+> UTPPort.Receive(UtGetPrintResult.Value != PRICE)
+	arrêter t0
+	Retourner fail
+> t0.timeout
+	Retourner inconc
+Tant Que MON_INS < PRICE Alors
+	Envoyer UtInsertCoin(2) à l'IUT
+	Démarrer t0 d'une durée PIXIT.tc_noac
+	alt
+	> UTPPort.Receive(UtSelectResult.Success == VRAI)
+		arrêter t0
+	> UTPPort.Receive(UtSelectResult.Success == FAUX)
+		arrêter t0
+		Retourner fail
+	> t0.timeout
+		Retourner inconc
+Pour DRK in DRKS:
+	Envoyer UtSelectDrink(DRK) à l'IUT
+	Démarrer t0 d'une durée PIXIT.tc_noac
+	alt
+	> UTPPort.Receive(UtSelectResult.Success == VRAI)
+		arrêter t0
+		Retourner fail
+	> UTPPort.Receive(UtSelectResult.Success == FAUX)
+		arrêter t0
+	> t0.timeout
+		Retourner inconc
+Retourner pass
+
+
+=== TP/CF/DR/BV-25
+Envoyer UtInitialize à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtResult.Success == FAUX)
+	arrêter t0
+	Retourner fail
+> UTPPort.Receive(UtResult.Success == VRAI)
+	arrêter t0
+> t0.timeout
+	Retourner inconc
+Envoyer UtGetInfos à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtGetInfosResult.Buckets == NaN)
+	arrêter t0
+	Retourner fail
+> t0.timeout
+	Retourner inconc
+BEFORE_CUPS = UtGetInfosResult.Buckets
+Envoyer UtSelectDrink(0) à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectResult.Value == FAUX)
+    arrêter t0
+    Retourner fail
+> UTPPort.Receive(UtSelectResult.Value == VRAI)
+    arrêter t0
+> t0.timeout
+    Retourner inconc
+Envoyer UtValidateDrink à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectResult.Success == FAUX)
+    arrêter t0
+    Retourner fail
+> UTPPort.Receive(UtSelectResult.Success == VRAI)
+    arrêter t0
+> t0.timeout
+    Retourner inconc
+PRICE <- getPrice(DRK)
+Envoyer UtGetPrint à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtGetPrintResult.Value == PRICE)
+	arrêter t0
+> UTPPort.Receive(UtGetPrintResult.Value != PRICE)
+	arrêter t0
+	Retourner fail
+> t0.timeout
+	Retourner inconc
+Tant Que MON_INS < PRICE Alors
+	Envoyer UtInsertCoin(2) à l'IUT
+	Démarrer t0 d'une durée PIXIT.tc_noac
+	alt
+	> UTPPort.Receive(UtSelectResult.Success == VRAI)
+		arrêter t0
+	> UTPPort.Receive(UtSelectResult.Success == FAUX)
+		arrêter t0
+		Retourner fail
+	> t0.timeout
+		Retourner inconc
+Envoyer UtGetDrink à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectResult.Success == VRAI)
+	arrêter t0
+> UTPPort.Receive(UtSelectResult.Success == FAUX)
+	arrêter t0
+	Retourner fail
+> t0.timeout
+	Retourner inconc
+Envoyer UtGetChange à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtSelectResult.Success == VRAI)
+	arrêter t0
+> UTPPort.Receive(UtSelectResult.Success == FAUX)
+	arrêter t0
+	Retourner fail
+> t0.timeout
+	Retourner inconc
+Envoyer UtGetInfos à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtGetInfosResult.Buckets == NaN)
+	arrêter t0
+	Retourner fail
+> t0.timeout
+	Retourner inconc
+AFTER_CUPS = UtGetInfosResult.Buckets
+Si (BEFORE_CUPS - 1) == AFTER_CUPS Alors
+	Retourner pass
+Sinon
+	Retourner fail
+
+
+=== TP/CF/DR/BV-28
+Envoyer UtInitialize à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtResult.Success == FAUX)
+	arrêter t0
+	Retourner fail
+> UTPPort.Receive(UtResult.Success == VRAI)
+	arrêter t0
+> t0.timeout
+	Retourner inconc
+Pour DRK in DRKS
+	Envoyer UtSetNbDrinks(DRK, 0) à l'IUT
+	Démarrer t0 d'une durée PIXIT.tc_noac
+	alt
+	> UTPPort.Receive(UtResult.Success == FAUX)
+		arrêter t0
+		Retourner fail
+	> UTPPort.Receive(UtResult.Success == VRAI)
+		arrêter t0
+	> t0.timeout
+		Retourner inconc
+	Envoyer UtSelectDrink(DRK) à l'IUT
+	Démarrer t0 d'une durée PIXIT.tc_noac
+	alt
+	> UTPPort.Receive(UtSelectResult.Success == FAUX)
+		arrêter t0
+	> UTPPort.Receive(UtSelectResult.Success == VRAI)
+		arrêter t0
+		Retourner fail
+	> t0.timeout
+		Retourner inconc
+Retourner pass
+
+
+=== TP/CF/DR/BV-31
+Envoyer UtInitialize à l'IUT
+Démarrer t0 d'une durée PIXIT.tc_noac
+alt
+> UTPPort.Receive(UtResult.Success == FAUX)
+	arrêter t0
+	Retourner fail
+> UTPPort.Receive(UtResult.Success == VRAI)
+	arrêter t0
+> t0.timeout
+	Retourner inconc
+Pour DRK in DRKS
+	Envoyer UtSetNbDrinks(DRK, 5) à l'IUT
+	Démarrer t0 d'une durée PIXIT.tc_noac
+	alt
+	> UTPPort.Receive(UtResult.Success == FAUX)
+		arrêter t0
+		Retourner fail
+	> UTPPort.Receive(UtResult.Success == VRAI)
+		arrêter t0
+	> t0.timeout
+		Retourner inconc
+Retourner pass

@@ -1,0 +1,14 @@
+tpid,id,date,primitive,expected,observed,verdict,requisites,datahex_sent,datahex_received
+TP/CF/DR/BV-12,0,"06/17/2022, 11:17:53.857325",UtInitialize,UtResult.Success == SUCCESS,UtResult.Success == SUCCESS,Pass,NaN,00,0101
+TP/CF/DR/BV-12,1,"06/17/2022, 11:17:53.859344",UtGetInfos,Get list of drinks indexes,"[0, 1, 2, 3, 4, 5, 6, 7, 8]",Pass,NaN,10,13c8640909416d65726963616e6f08312e353020e282ac01084974616c69616e6f08302e353020e282ac01054c6174746508312e373020e282ac010a43617070756363696e6f08312e383020e282ac010b476f6f6420436f6666656508312e323020e282ac00094561726c204772657908312e333020e282ac0109477265656e2054656108312e303020e282ac0109426c61636b2054656108312e303020e282ac0104536f617008322e303020e282ac00
+TP/CF/DR/BV-12,2,"06/17/2022, 11:17:53.859344",UtSelectDrink at index 0,UtSelectResult.Success == SUCCESS,UtSelectResult.Success == SUCCESS,Pass,NaN,2100,2001
+TP/CF/DR/BV-12,3,"06/17/2022, 11:17:53.859344",UtValidate,UtValidateResult == SUCCESS,UtValidateResult == SUCCESS,Pass,NaN,23,2001
+TP/CF/DR/BV-12,4,"06/17/2022, 11:17:53.859344",UtSelectDrink at index 0,UtSelectResult.Success == ERROR,UtValidateResult == ERROR,Pass,NaN,2100,2000
+TP/CF/DR/BV-12,5,"06/17/2022, 11:17:53.859344",UtSelectDrink at index 1,UtSelectResult.Success == ERROR,UtValidateResult == ERROR,Pass,NaN,2101,2000
+TP/CF/DR/BV-12,6,"06/17/2022, 11:17:53.860321",UtSelectDrink at index 2,UtSelectResult.Success == ERROR,UtValidateResult == ERROR,Pass,NaN,2102,2000
+TP/CF/DR/BV-12,7,"06/17/2022, 11:17:53.860321",UtSelectDrink at index 3,UtSelectResult.Success == ERROR,UtValidateResult == ERROR,Pass,NaN,2103,2000
+TP/CF/DR/BV-12,8,"06/17/2022, 11:17:53.860321",UtSelectDrink at index 4,UtSelectResult.Success == ERROR,UtValidateResult == ERROR,Pass,NaN,2104,2000
+TP/CF/DR/BV-12,9,"06/17/2022, 11:17:53.860321",UtSelectDrink at index 5,UtSelectResult.Success == ERROR,UtValidateResult == ERROR,Pass,NaN,2105,2000
+TP/CF/DR/BV-12,10,"06/17/2022, 11:17:53.860321",UtSelectDrink at index 6,UtSelectResult.Success == ERROR,UtValidateResult == ERROR,Pass,NaN,2106,2000
+TP/CF/DR/BV-12,11,"06/17/2022, 11:17:53.860321",UtSelectDrink at index 7,UtSelectResult.Success == ERROR,UtValidateResult == ERROR,Pass,NaN,2107,2000
+TP/CF/DR/BV-12,12,"06/17/2022, 11:17:53.861321",UtSelectDrink at index 8,UtSelectResult.Success == ERROR,UtValidateResult == ERROR,Pass,NaN,2108,2000

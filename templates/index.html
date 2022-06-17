@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<head>
+    <title>Coffee Machine Tester</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #table_history {
+            display: block;
+            height: 75vh;
+            width: 100%;
+            overflow-y: auto;
+            direction: rtl;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        table {
+            width: auto;
+            direction: ltr;
+        }
+
+        td {
+            white-space: normal
+            width: 0;
+        }
+
+        td.truncate {
+            width: 20%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: 20px;
+        }
+
+        input[type=number] {
+            width: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div style="float: left; height: 100%; width: 20%">
+        <h2>Tests</h2>
+        <p><i>Placeholders are default values</i></p>
+        <form method="post">
+            <input type="submit" value="TP01" name="action" />
+            <br>
+            <input type="submit" value="TP02" name="action" />
+            <br>
+            <label>Drink index:
+              <input type="number" value="0" name="p1tp3" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP03" name="action" />
+            <br>
+            <label>First drink idx:
+              <input type="number" value="0" name="p1tp4" min="0" max="255"/>
+            </label>
+            <label>Second drink idx:
+              <input type="number" value="1" name="p2tp4" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP04" name="action" />
+            <br>
+            <label>Drink index:
+              <input type="number" value="0" name="p1tp5" min="0" max="255"/>
+            </label>
+            <label>Sugar:
+              <input type="number" value="5" name="p2tp5" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP05" name="action" />
+            <br>
+            <label>Drink index:
+              <input type="number" value="8" name="p1tp6" min="0" max="255"/>
+            </label>
+            <label>Sugar:
+              <input type="number" value="5" name="p2tp6" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP06" name="action" />
+            <br>
+            <label>Sugar:
+              <input type="number" value="11" name="p1tp7" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP07" name="action" />
+            <br>
+            <label>Sugar:
+              <input type="number" value="-1" name="p1tp8" min="-255" max="0"/>
+            </label>
+            <input type="submit" value="TP08" name="action" />
+            <br>
+            <input type="submit" value="TP09" name="action" />
+            <br>
+            <input type="submit" value="TP10" name="action" />
+            <br>
+            <input type="submit" value="TP11" name="action" />
+            <br>
+            <input type="submit" value="TP12" name="action" />
+            <br>
+            <input type="submit" value="TP13" name="action" />
+            <br>
+            <input type="submit" value="TP14" name="action" />
+            <br>
+            <input type="submit" value="TP15" name="action" />
+            <br>
+            <input type="submit" value="TP16" name="action" />
+            <br>
+            <input type="submit" value="TP17" name="action" />
+            <br>
+            <label>Drink index:
+              <input type="number" value="0" name="p1tp18" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP18" name="action" />
+            <br>
+            <label>Drink index:
+              <input type="number" value="0" name="p1tp19" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP19" name="action" />
+            <br>
+            <label>Drink index:
+              <input type="number" value="0" name="p1tp20" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP20" name="action" />
+            <br>
+            <label>Drink index:
+              <input type="number" value="0" name="p1tp21" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP21" name="action" />
+            <br>
+            <label>Drink index:
+              <input type="number" value="0" name="p1tp22" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP22" name="action" />
+            <br>
+            <label>Drink index:
+              <input type="number" value="0" name="p1tp23" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP23" name="action" />
+            <br>
+            <label>Drink index:
+              <input type="number" value="0" name="p1tp24" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP24" name="action" />
+            <br>
+            <label>Drink index:
+              <input type="number" value="0" name="p1tp25" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP25" name="action" />
+            <br>
+            <label>Drink index:
+              <input type="number" value="0" name="p1tp26" min="0" max="255"/>
+            </label>
+            <label>Sugar:
+              <input type="number" value="5" name="p2tp26" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP26" name="action" />
+            <br>
+            <label>Drink index:
+              <input type="number" value="8" name="p1tp27" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP27" name="action" />
+            <br>
+            <input type="submit" value="TP28" name="action" />
+            <br>
+            <input type="submit" value="TP29" name="action" />
+            <br>
+            <input type="submit" value="TP30" name="action" />
+            <br>
+            <label>Drink index:
+                <input type="number" value="0" name="p1tp31" min="0" max="255"/>
+            </label>
+            <label>New amount:
+              <input type="number" value="100" name="p2tp31" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP31" name="action" />
+            <br>
+            <label>New sugar amount:
+                <input type="number" value="200" name="p1tp32" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP32" name="action" />
+            <br>
+            <label>New bucket amount:
+                <input type="number" value="100" name="p1tp33" min="0" max="255"/>
+            </label>
+            <input type="submit" value="TP33" name="action" />
+        </form>
+
+        <h2>Hexa test</h2>
+        <form method="post">
+            <label>
+                <input type="text" name="hex" placeholder="00"/>
+            </label>
+            <input type="submit" value="testhex" name="testhex"/>
+            <p>Result: <strong>{{ result }}</strong></p>
+        </form>
+    </div>
+    <div style="float: right; height: fit-content; width: 80%">
+        <div>
+            <h2 style="display: inline-block">History</h2>&nbsp;
+            <form method="post" style="margin-bottom: 20px">
+                <input type="submit" value="generate csv" name="generate"/>
+                <input type="submit" value="clean" name="clean"/>
+            </form>
+        </div>
+        <div id="table_history">
+            <table id="history">
+                <thead>
+                    <tr>
+                        <th>TP ID</th>
+                        <th>Req ID</th>
+                        <th>Datetime</th>
+                        <th>Primitive</th>
+                        <th>Expected</th>
+                        <th>Observed</th>
+                        <th>Verdict</th>
+                        <th>Requirement</th>
+                        <th>Datahex sent</th>
+                        <th>Datahex received</th>
+                    </tr>
+                  </thead>
+                <tbody>
+                    {% for hist in history %}
+                    <tr>
+                        <td>{{ hist.tpid }}</td>
+                        <td>{{ hist.id }}</td>
+                        <td>{{ hist.date }}</td>
+                        <td>{{ hist.primitive }}</td>
+                        <td>{{ hist.expected }}</td>
+                        <td class="truncate">{{ hist.observed }}</td>
+                        {% if hist.verdict == "Pass" %}
+                            <td style="background: #4BB543">{{ hist.verdict }}</td>
+                        {% elif hist.verdict == "Fail" %}
+                            <td style="background: #EE6055">{{ hist.verdict }}</td>
+                        {% elif hist.verdict == "Error" %}
+                            <td style="background: #FF8FE3">{{ hist.verdict }}</td>
+                        {% elif hist.verdict == "Inconc" %}
+                            <td style="background: #FFD164">{{ hist.verdict }}</td>
+                        {% else %}
+                            <td style="background: #24A0ED">{{ hist.verdict }}</td>
+                        {% endif %}
+                        <td>{{ hist.requisites }}</td>
+                        <td>{{ hist.datahex_sent }}</td>
+                        <td class="truncate">{{ hist.datahex_received }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
