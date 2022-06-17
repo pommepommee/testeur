@@ -25,3 +25,6 @@ options:
 ```
 
 Open `localhost:5000` (Flask default)
+
+Run tests on the left -- See results on the right 
+![image](https://user-images.githubusercontent.com/28791624/174411292-4c06550c-ce56-4fa4-a5a3-83ea96cb5c84.png)
