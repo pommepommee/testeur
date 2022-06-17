@@ -12,7 +12,7 @@ Activate venv
 Install requirements
 `python -m pip install -r requirements.txt`
 
-Run app.py
+## Run
 ```
 python app.py -h
 usage: app.py [-h] [--host HOST] [--port PORT] [--timeout TIMEOUT]
@@ -24,9 +24,12 @@ options:
   --timeout TIMEOUT  socket timeout in seconds
 ```
 
-Open `localhost:5000` (Flask default)
+## Flask
+1. Open `localhost:5000` (Flask default)
 
-Run the coffee machine
+## Tests
 
-Run tests on the left -- See results on the right 
+1.Launch coffee machine
+
+2. Run tests on the left -- See results on the right 
 ![image](https://user-images.githubusercontent.com/28791624/174411292-4c06550c-ce56-4fa4-a5a3-83ea96cb5c84.png)
